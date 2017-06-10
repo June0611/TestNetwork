@@ -110,6 +110,8 @@ class NetworkService{
     ///   - complete: 转换完成回调
     static func transformModel<T:NSObject>(result:Any?,
                                complete:@escaping (_ result:T?,_ resultArray:[T]?)->()){
+        
+        
         let jsonStr = self.converNetData(result: result as Any)
         let obj = T.mj_object(withKeyValues: jsonStr)
         var objArr = [T]()
@@ -128,19 +130,21 @@ class NetworkService{
     ///
     /// - Parameter result: 网络数据
     /// - Returns: 返回结果
-    static func converNetData(result:Any) -> Any{
-        var convertedResult:Any?
+    static func converNetData(result:Any) -> String{
+        let respose = String.init(data: result as! Data, encoding: String.Encoding.utf8)
+        return self.decreptRespose(respose: respose)
+
+    }
+    
+    
+    /// 解密
+    ///
+    /// - Parameter respose: 网络数据
+    /// - Returns: 解密结果
+    static func decreptRespose(respose:String?) -> String{
         
-        do {
-            let respose = String.init(data: result as! Data, encoding: String.Encoding.utf8)
-            //如果需要解密操作-----
-            if let useData = respose?.data(using: String.Encoding.utf8){
-                 convertedResult = try JSONSerialization.jsonObject(with: useData, options: JSONSerialization.ReadingOptions.mutableLeaves)
-            }
-        } catch {
-            
-        }
-        return convertedResult ?? Dictionary<String,Any>()
+        //自己实现解密
+        return respose ?? "{}"
     }
 }
 
@@ -151,7 +155,7 @@ class NetworkService{
 class RequsetManager :AFHTTPSessionManager {
     
     
-    /// 初始化单利
+    /// 初始化RequsetManager单利
     static let sharedRequestManager:RequsetManager = {
         let instance = RequsetManager()
         instance.requestSerializer.timeoutInterval = 60.0

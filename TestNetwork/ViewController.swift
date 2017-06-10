@@ -13,29 +13,31 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        NetworkService .GetRequest(url: "http://10.238.48.161:8080/SkeeterTask/test/login", params: nil) { (model:TestModel?, error:Error?) in
+    }
+
+    @IBAction func test1(_ sender: UIButton) {
+        NetworkService .GetRequest(url: "http://192.168.1.107:8080/SkeeterTask/test/login", params: nil) { (model:TestModel?, error:Error?) in
             if error != nil {
                 print("Error")
                 return
             }
-            print(model?.message ?? "NoMessage")
+            print("结果为对象--->\(model?.message ?? "NoMessage")")
         }
+    }
+
+    @IBAction func test2(_ sender: UIButton) {
         
-        NetworkService.GetRequest(url: "http://10.238.48.161:8080/SkeeterTask/test/login2", params: nil) { (modelArr:[TestModel]?, error:Error?) in
+        NetworkService.GetRequest(url: "http://192.168.1.107:8080/SkeeterTask/test/login2", params: nil) { (modelArr:[TestModel]?, error:Error?) in
             if error != nil{
                 print("Error")
                 return
             }
             if let arr = modelArr{
                 for item in arr{
-                    print(item.message ?? "NoMessage")
+                    print("结果为对象数组--->\(item.message ?? "NoMessage")")
                 }
             }
         }
-
     }
-
-
 }
 

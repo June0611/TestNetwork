@@ -20,7 +20,7 @@ class NetworkService{
     ///   - url: 请求地址
     ///   - params: 请求参数
     ///   - complete: 请求回调 -- 回传结果为对象
-    static func GetRequest<T:NSObject>(url:String,
+    class func GetRequest<T:NSObject>(url:String,
                            params:[String:AnyObject]?,
                            complete:@escaping (_ dataModel:T?,_ error:Error?)->()){
         
@@ -41,7 +41,7 @@ class NetworkService{
     ///   - url: 请求地址
     ///   - params: 请求参数
     ///   - complete: 请求完成回调 -- 回传结果为对象数组
-    static func GetRequest<T:NSObject>(url:String,
+    class func GetRequest<T:NSObject>(url:String,
                            params:[String:AnyObject]?,
                            complete:@escaping (_ dataModelArray:[T]?,_ error:Error?)->()){
         
@@ -63,7 +63,7 @@ class NetworkService{
     ///   - url: 请求地址
     ///   - params: 请求参数
     ///   - complete: 请求回调 -- 回传结果为对象
-    static func PostRequest<T:NSObject>(url:String,
+    class func PostRequest<T:NSObject>(url:String,
                            params:[String:AnyObject]?,
                            complete:@escaping (_ dataModel:T?,_ error:Error?)->()){
         
@@ -84,7 +84,7 @@ class NetworkService{
     ///   - url: 请求地址
     ///   - params: 请求参数
     ///   - complete: 请求完成回调 -- 回传结果为对象数组
-    static func PostRequest<T:NSObject>(url:String,
+    class func PostRequest<T:NSObject>(url:String,
                            params:[String:AnyObject]?,
                            complete:@escaping (_ dataModelArray:[T]?,_ error:Error?)->()){
         
@@ -108,7 +108,7 @@ class NetworkService{
     /// - Parameters:
     ///   - result: 网络返回数据
     ///   - complete: 转换完成回调
-    static func transformModel<T:NSObject>(result:Any?,
+    class func transformModel<T:NSObject>(result:Any?,
                                complete:@escaping (_ result:T?,_ resultArray:[T]?)->()){
         
         
@@ -130,7 +130,7 @@ class NetworkService{
     ///
     /// - Parameter result: 网络数据
     /// - Returns: 返回结果
-    static func converNetData(result:Any) -> String{
+    class func converNetData(result:Any) -> String{
         let respose = String.init(data: result as! Data, encoding: String.Encoding.utf8)
         return self.decreptRespose(respose: respose)
 
@@ -141,7 +141,7 @@ class NetworkService{
     ///
     /// - Parameter respose: 网络数据
     /// - Returns: 解密结果
-    static func decreptRespose(respose:String?) -> String{
+    class func decreptRespose(respose:String?) -> String{
         
         //自己实现解密
         return respose ?? "{}"
@@ -174,7 +174,7 @@ class RequsetManager :AFHTTPSessionManager {
     ///   - params: 请求参数
     ///   - success: 请求成功回调
     ///   - failure: 请求失败回调
-    static func getRequest(url:String,
+    class func getRequest(url:String,
                     params:[String:AnyObject]?,
                     success:@escaping (_ responseData:Any?)->()?,
                     failure:@escaping (_ error:Error)->()?){
@@ -197,7 +197,7 @@ class RequsetManager :AFHTTPSessionManager {
     ///   - params: 请求参数
     ///   - success: 请求成功回调
     ///   - failure: 请求失败回调
-    static func postRequest(url:String,
+    class func postRequest(url:String,
                     params:[String:AnyObject]?,
                     success:@escaping (_ responseData:Any?)->()?,
                     failure:@escaping (_ error:Error)->()?){
